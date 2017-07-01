@@ -67,6 +67,7 @@
       <body>
         <div class="header">
           <h1>El Canal de Carlos</h1>
+          </div>
           <amp-live-list 
             id="amp-live-list-videos"
             data-poll-interval="15000"
@@ -78,7 +79,39 @@
               update on="tap:amp-live-list-videos.update" >
             Tienes actualizaciones
           </button>
+          <div items>
+          <% posts.forEach((post) => { %>
+
+            <div class="post" id="<%= post.id %>" data-sort-time="<%= post.timestamp %>">
+              <amp-youtube
+                width="480"
+                height="270"
+                layout="responsive"
+                data-videoid="<%= post.videoID %>"
+              />
+            </div>
+
+          <% }) %>
+          </div>
+          <div pagination>
+            <nav aria-label="amp live list pagination">
+
+              <% if (pageCount > 1) { %>
+              <ul class="pagination">
+
+                <% for (var i = 1; i <= pageCount; i++) { %>
+                  <% if (currentPage == i) { %>
+                    <li><%= i %></li>
+                  <% } else { %>
+                    <li><a href="/?page=<%= i %>"><%= i %></a></li>
+                  <% } %>
+                <% } %>
+
+              </ul>
+              <% } %>  
+            </nav>
+          </div>
         </amp-live-list>
-        </div>
+        
       <body>
     </html>
